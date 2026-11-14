@@ -15,8 +15,6 @@ jobs:
       - name: Setup Environment & Get KernelSU-Next
         run: |
           sudo apt-get update && sudo apt-get install -y build-essential libncurses-dev bison flex bc git libssl-dev wget zip
-          
-          # إزالة أي دعم قديم إن وجد وجلب أحدث KernelSU-Next
           rm -rf drivers/kernelsu
           curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -s next
 
@@ -31,7 +29,6 @@ jobs:
           export SUBARCH=arm64
           export KBUILD_BUILD_USER="mstfyqdry"
           export KBUILD_BUILD_HOST="github"
-          
           make -j$(nproc) O=out vayu_defconfig
           make -j$(nproc) O=out CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-android-
 
@@ -43,7 +40,7 @@ jobs:
           cd AnyKernel3 && zip -r9 ../NGK-KSU-Next-Vayu.zip *
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: NGK-KSU-Next-PocoX3Pro
           path: NGK-KSU-Next-Vayu.zip
