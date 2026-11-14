@@ -20,7 +20,7 @@ jobs:
 
       - name: Setup Clang Toolchain
         run: |
-          git clone --depth=1 https://github.com/Line-Code/aarch64-linux-android-clang.git clang
+          git clone --depth=1 https://github.com/ZyCromerZ/Clang.git -b 18 clang
 
       - name: Build Kernel
         run: |
